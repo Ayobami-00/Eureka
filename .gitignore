@@ -1,0 +1,8 @@
+*.log
+.vscode
+
+
+# eureka-api-gateway-go
+eureka-api-gateway-go/cert/*.pem
+eureka-api-gateway-go/commands.txt
+eureka-api-gateway-go/.env
