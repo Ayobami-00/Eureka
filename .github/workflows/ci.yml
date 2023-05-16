@@ -1,0 +1,79 @@
+
+name: CI/CD. 
+on:
+  push:
+    branches:
+    - main
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+  LAMBDA_FUNCTION_NAME: ${{ secrets.EUREKA_API_GATEWAY_LAMBDA_FUNCTION_NAME }}
+
+permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read    # This is required for actions/checkout
+
+
+jobs:
+  AssumeRoleAndCallIdentity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: ${{ secrets.GITHUB_ACTIONS_AWS_ACTION_ROLE_ARN }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+      # Hello from AWS: WhoAmI
+      - name: Sts GetCallerIdentity
+        run: |
+          aws sts get-caller-identit
+jobs:
+# eureka-api-gateway-go folder job.
+  deploy_eureka_api_gateway_go:
+
+    name: Deploy Eureka API Gateway Go to AWS Lambda
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+      # eureka-api-gateway-go folder working directory.
+        working-directory: eureka-api-gateway-go
+
+    steps:
+      - uses: actions/checkout@v2 
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            eureka-api-gateway-go:
+              - 'eureka-api-gateway-go/**'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.GIT_ACTIONS_AWS_ACTION_ROLE_ARN }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+          
+      - name: Sts GetCallerIdentity
+        run: |
+          aws sts get-caller-identity
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+      # - name: Deploy to Lambda
+      #   run: |
+      #     aws lambda update-function-code \
+      #       --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
+      #       --image-uri ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
