@@ -10,4 +10,4 @@ WORKDIR /app
 COPY --from=builder /app/main .
 
 # Set the command to run when the container starts
-CMD ["/app/main]
+CMD ["/app/main"]
