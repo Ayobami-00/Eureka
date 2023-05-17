@@ -46,6 +46,17 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Load eureka-api-gateway-go envs and save to .env
+        run: aws secretsmanager get-secret-value --secret-id eureka-api-gateway-go-env --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > .env
+
+      - name: Load eureka-api-gateway-go .pem files and save to .env
+        run: |
+          # Retrieve combined .pem file from AWS Secrets Manager
+          COMBINED_PEM=$(aws secretsmanager get-secret-value --secret-id eureka-api-gateway-go-pem --query SecretString --output text)
+          # Recreate original .pem files
+          echo "$COMBINED_PEM" | awk '/-----BEGIN CERTIFICATE-----/{i++;}{print > "cert/client-cert.pem"; print > "cert/client-key.pem"; print > "cert/ca-cert.pem";}'
+
+
       - name: Build, tag, and push image to Amazon ECR
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .

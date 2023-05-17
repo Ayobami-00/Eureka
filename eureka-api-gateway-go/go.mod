@@ -3,6 +3,8 @@ module github.com/Ayobami-00/Eureka
 go 1.19
 
 require (
+	github.com/aws/aws-lambda-go v1.41.0
+	github.com/awslabs/aws-lambda-go-api-proxy v0.14.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/spf13/viper v1.15.0
 	google.golang.org/grpc v1.55.0
