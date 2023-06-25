@@ -1,0 +1,6 @@
+chmod u+x gen.sh
+chmod +r server-cert.pem
+
+cat client-cert.pem client-key.pem ca-cert.pem > combined-certs.pem
+
+source ~/.bash_profile
