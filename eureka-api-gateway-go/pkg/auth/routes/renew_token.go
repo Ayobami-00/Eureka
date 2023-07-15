@@ -9,25 +9,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type RegisterRequestBody struct {
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+type RenewTokenRequestBody struct {
+	RefreshToken string `json:"refresh_token"`
 }
 
-func Register(ctx *gin.Context, c pb.AuthServiceClient) {
-	reqBody := RegisterRequestBody{}
+func RenewToken(ctx *gin.Context, c pb.AuthServiceClient) {
+
+	reqBody := RenewTokenRequestBody{}
 
 	if err := ctx.BindJSON(&reqBody); err != nil {
 		ctx.JSON(http.StatusBadRequest, api_response.BaseErrorResponse(err.Error()))
 		return
 	}
 
-	res, _ := c.Register(context.Background(), &pb.RegisterRequest{
-		Username: reqBody.Username,
-		Email:    reqBody.Email,
-		Password: reqBody.Password,
+	res, _ := c.RenewToken(context.Background(), &pb.RenewTokenRequest{
+		RefreshToken: reqBody.RefreshToken,
 	})
 
 	api_response.Respond(ctx, res)
+
 }

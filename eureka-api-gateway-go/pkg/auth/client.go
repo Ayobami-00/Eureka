@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Ayobami-00/Eureka/bootstrap"
-	"github.com/Ayobami-00/Eureka/pkg/auth/pb"
-	"github.com/Ayobami-00/Eureka/utils"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/bootstrap"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/pkg/auth/pb"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/utils"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 type ServiceClient struct {
@@ -18,12 +19,19 @@ func InitServiceClient(env *bootstrap.Env) pb.AuthServiceClient {
 
 	var transportOption grpc.DialOption
 
-	tlsCredentials, err := utils.LoadTLSCredentials()
-	if err != nil {
-		log.Fatal("cannot load TLS credentials: ", err)
-	}
+	if env.AppEnv == "PRODUCTION" {
 
-	transportOption = grpc.WithTransportCredentials(tlsCredentials)
+		tlsCredentials, err := utils.LoadTLSCredentials()
+		if err != nil {
+			log.Fatal("cannot load TLS credentials: ", err)
+		}
+
+		transportOption = grpc.WithTransportCredentials(tlsCredentials)
+
+	} else {
+
+		transportOption = grpc.WithTransportCredentials(insecure.NewCredentials())
+	}
 
 	cc, err := grpc.Dial(env.AuthServiceUrl, transportOption)
 

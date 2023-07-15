@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/Ayobami-00/Eureka/api/route"
-	"github.com/Ayobami-00/Eureka/bootstrap"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/api/route"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/bootstrap"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"

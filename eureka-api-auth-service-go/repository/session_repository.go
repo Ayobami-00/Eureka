@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/Ayobami-00/Eureka/eureka-api-auth-service-go/bootstrap"
@@ -115,8 +114,6 @@ func (sr *sessionRepository) GetByID(ctx context.Context, id string) (domain.Ses
 	if res.Item == nil {
 		return session, err
 	}
-
-	fmt.Println(res.Item)
 
 	if err := dynamodbattribute.UnmarshalMap(res.Item, &session); err != nil {
 

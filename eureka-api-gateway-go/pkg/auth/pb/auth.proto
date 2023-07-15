@@ -2,20 +2,20 @@ syntax = "proto3";
 
 package auth;
 
-option go_package = "./pkg/auth/pb";
+option go_package = "./pb";
 
 
 // Register
 
 message RegisterRequest {
-    string username = 1;
-    string email = 2;
-    string password = 3;
+  string username = 1;
+  string email = 2;
+  string password = 3;
   }
   
   message RegisterResponse {
-    int64 status = 1;
-    string error = 2;
+    int64 code = 1;
+    string message = 2;
   }
   
   // Login
@@ -23,22 +23,41 @@ message RegisterRequest {
   message LoginRequest {
     string email = 1;
     string password = 2;
+    string user_agent = 3;
+    string client_ip = 4;
   }
   
   message LoginResponse {
-    int64 status = 1;
-    string error = 2;
-    string token = 3;
+    int64 code = 1;
+    string message = 2;
+    string session_id = 3;
+    string access_token = 4;
+    int64 access_token_expires_at = 5;
+    string refresh_token = 6;
+    int64 refresh_token_expires_at = 7;
+    string user_id = 8;
   }
   
   // Validate
   
-  message ValidateRequest { string token = 1; }
+  message ValidateRequest { string access_token = 1; }
   
   message ValidateResponse {
-    int64 status = 1;
-    string error = 2;
-    int64 userId = 3;
+    int64 code = 1;
+    string message = 2;
+    string user_id = 3;
+  }
+
+
+  // Refresh Token
+  
+  message RenewTokenRequest { string refresh_token = 1; }
+  
+  message RenewTokenResponse {
+    int64 code = 1;
+    string message = 2;
+    string access_token = 3;
+    int64 access_token_expires_at = 4;
   }
   
 
@@ -46,4 +65,5 @@ service AuthService {
     rpc Register(RegisterRequest) returns (RegisterResponse) {}
     rpc Login(LoginRequest) returns (LoginResponse) {}
     rpc Validate(ValidateRequest) returns (ValidateResponse) {}
+    rpc RenewToken(RenewTokenRequest) returns (RenewTokenResponse) {}
   }

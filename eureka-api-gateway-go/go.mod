@@ -1,4 +1,4 @@
-module github.com/Ayobami-00/Eureka
+module github.com/Ayobami-00/Eureka/eureka-api-gateway-go
 
 go 1.19
 

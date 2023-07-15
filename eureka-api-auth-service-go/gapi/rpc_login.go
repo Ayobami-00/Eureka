@@ -26,12 +26,12 @@ func (s *Server) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResp
 
 	db_user, err := lu.GetUserByEmail(ctx, req.GetEmail())
 	if err != nil {
-		return api_response.ErrorNotFound(&pb.RegisterResponse{}, "User doesn't exists with the given email").(*pb.LoginResponse), nil
+		return api_response.ErrorNotFound(&pb.LoginResponse{}, "User doesn't exists with the given email").(*pb.LoginResponse), nil
 	}
 
 	err = crypto.VerifyPassword(req.GetPassword(), db_user.Password)
 	if err != nil {
-		return api_response.ErrorInternal(&pb.LoginResponse{}, fmt.Sprintf("Failed to verify password: %s", err)).(*pb.LoginResponse), nil
+		return api_response.ErrorInternal(&pb.LoginResponse{}, "Incorrect Password").(*pb.LoginResponse), nil
 	}
 
 	accessToken, accessPayload, err := s.TokenMaker.CreateToken(

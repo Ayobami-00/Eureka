@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Ayobami-00/Eureka/pkg/auth"
-	"github.com/Ayobami-00/Eureka/pkg/auth/pb"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/pkg/auth"
+	"github.com/Ayobami-00/Eureka/eureka-api-gateway-go/pkg/auth/pb"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc/codes"
 )
 
 type AuthMiddlewareConfig struct {
@@ -33,11 +34,11 @@ func (c *AuthMiddlewareConfig) AuthRequired(ctx *gin.Context) {
 		return
 	}
 
-	res, err := c.svc.Client.Validate(context.Background(), &pb.ValidateRequest{
-		Token: token[1],
+	res, _ := c.svc.Client.Validate(context.Background(), &pb.ValidateRequest{
+		AccessToken: token[1],
 	})
 
-	if err != nil || res.Status != http.StatusOK {
+	if res.Code != int64(codes.OK) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{})
 		return
 	}
