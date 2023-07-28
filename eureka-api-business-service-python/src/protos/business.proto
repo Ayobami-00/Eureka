@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package business;
+
+
+message Business {
+  string id = 1;
+  string created_by = 2;
+  string name = 3;
+  string description = 4;
+  string long_address = 5;
+  double latitude = 6;
+  double longitude = 7;
+  }
+
+
+// Fetch All Business
+
+message FetchAllBusinessResponse {
+  int64 code = 1;
+  string message = 2;
+  repeated Business businesses = 3;
+}
+
+
+// Create Business
+
+message CreateBusinessRequest {
+    string created_by = 1;
+    string name = 2;
+    string description = 3;
+    string long_address = 4;
+    double latitude = 5;
+    double longitude = 6;
+    }
+
+
+message CreateBusinessResponse {
+  int64 code = 1;
+  string message = 2;
+
+}
+
+
+// Fetch Business ById
+
+message FetchBusinessByIdRequest {
+  string id = 1;
+
+}
+
+message FetchBusinessByIdResponse {
+  int64 code = 1;
+  string message = 2;
+  Business business = 3;
+
+}
+
+
+// Update Business
+
+message UpdateBusinessRequest {
+  Business business = 1;
+
+}
+
+message UpdateBusinessResponse {
+  int64 code = 1;
+  string message = 2;
+  Business business = 3;
+
+}
+
+
+
+// Delete Business
+
+message DeleteBusinessRequest {
+  string id = 1;
+
+}
+
+message DeleteBusinessResponse {
+  int64 code = 1;
+  string message = 2;
+
+}
+
+
+
+service BusinessService {
+  // rpc FetchAll() returns (FetchAllBusinessResponse) {}
+  rpc Create(CreateBusinessRequest) returns (CreateBusinessResponse) {}
+  rpc FetchById(FetchBusinessByIdRequest) returns (FetchBusinessByIdResponse) {}
+  rpc Update(UpdateBusinessRequest) returns (UpdateBusinessResponse) {}
+  rpc Delete(DeleteBusinessRequest) returns (DeleteBusinessResponse) {}
+}
