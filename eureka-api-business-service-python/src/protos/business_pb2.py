@@ -14,11 +14,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x62usiness.proto\x12\x08\x62usiness\"\x88\x01\n\x08\x42usiness\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\ncreated_by\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0clong_address\x18\x05 \x01(\t\x12\x10\n\x08latitude\x18\x06 \x01(\x01\x12\x11\n\tlongitude\x18\x07 \x01(\x01\"a\n\x18\x46\x65tchAllBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12&\n\nbusinesses\x18\x03 \x03(\x0b\x32\x12.business.Business\"\x89\x01\n\x15\x43reateBusinessRequest\x12\x12\n\ncreated_by\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x14\n\x0clong_address\x18\x04 \x01(\t\x12\x10\n\x08latitude\x18\x05 \x01(\x01\x12\x11\n\tlongitude\x18\x06 \x01(\x01\"7\n\x16\x43reateBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\"&\n\x18\x46\x65tchBusinessByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"`\n\x19\x46\x65tchBusinessByIdResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12$\n\x08\x62usiness\x18\x03 \x01(\x0b\x32\x12.business.Business\"=\n\x15UpdateBusinessRequest\x12$\n\x08\x62usiness\x18\x01 \x01(\x0b\x32\x12.business.Business\"]\n\x16UpdateBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12$\n\x08\x62usiness\x18\x03 \x01(\x0b\x32\x12.business.Business\"#\n\x15\x44\x65leteBusinessRequest\x12\n\n\x02id\x18\x01 \x01(\t\"7\n\x16\x44\x65leteBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t2\xd6\x02\n\x0f\x42usinessService\x12M\n\x06\x43reate\x12\x1f.business.CreateBusinessRequest\x1a .business.CreateBusinessResponse\"\x00\x12V\n\tFetchById\x12\".business.FetchBusinessByIdRequest\x1a#.business.FetchBusinessByIdResponse\"\x00\x12M\n\x06Update\x12\x1f.business.UpdateBusinessRequest\x1a .business.UpdateBusinessResponse\"\x00\x12M\n\x06\x44\x65lete\x12\x1f.business.DeleteBusinessRequest\x1a .business.DeleteBusinessResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x62usiness.proto\x12\x08\x62usiness\"\xb0\x01\n\x08\x42usiness\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x12\n\ncreated_by\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0clong_address\x18\x05 \x01(\t\x12\x10\n\x08latitude\x18\x06 \x01(\x01\x12\x11\n\tlongitude\x18\x07 \x01(\x01\x12\x12\n\ncreated_at\x18\x08 \x01(\x03\x12\x12\n\nupdated_at\x18\t \x01(\x03\"z\n\x0e\x42usinessUpdate\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0clong_address\x18\x05 \x01(\t\x12\x10\n\x08latitude\x18\x06 \x01(\x01\x12\x11\n\tlongitude\x18\x07 \x01(\x01\":\n\x17\x46\x65tchAllBusinessRequest\x12\x0c\n\x04page\x18\x01 \x01(\x03\x12\x11\n\tpage_size\x18\x02 \x01(\x03\"s\n)FetchAllBusinessResponseDataSearchOptions\x12\x0c\n\x04page\x18\x01 \x01(\x03\x12\x11\n\tpage_size\x18\x02 \x01(\x03\x12\x10\n\x08ordering\x18\x03 \x01(\t\x12\x13\n\x0btotal_count\x18\x04 \x01(\x03\"\x8f\x01\n\x1c\x46\x65tchAllBusinessResponseData\x12\"\n\x06\x66ounds\x18\x01 \x03(\x0b\x32\x12.business.Business\x12K\n\x0esearch_options\x18\x02 \x01(\x0b\x32\x33.business.FetchAllBusinessResponseDataSearchOptions\"o\n\x18\x46\x65tchAllBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x34\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32&.business.FetchAllBusinessResponseData\"\x89\x01\n\x15\x43reateBusinessRequest\x12\x12\n\ncreated_by\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x14\n\x0clong_address\x18\x04 \x01(\t\x12\x10\n\x08latitude\x18\x05 \x01(\x01\x12\x11\n\tlongitude\x18\x06 \x01(\x01\"7\n\x16\x43reateBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\"&\n\x18\x46\x65tchBusinessByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"`\n\x19\x46\x65tchBusinessByIdResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12$\n\x08\x62usiness\x18\x03 \x01(\x0b\x32\x12.business.Business\"C\n\x15UpdateBusinessRequest\x12*\n\x08\x62usiness\x18\x01 \x01(\x0b\x32\x18.business.BusinessUpdate\"]\n\x16UpdateBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t\x12$\n\x08\x62usiness\x18\x03 \x01(\x0b\x32\x12.business.Business\"#\n\x15\x44\x65leteBusinessRequest\x12\n\n\x02id\x18\x01 \x01(\t\"7\n\x16\x44\x65leteBusinessResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x03\x12\x0f\n\x07message\x18\x02 \x01(\t2\xaf\x03\n\x0f\x42usinessService\x12S\n\x08\x46\x65tchAll\x12!.business.FetchAllBusinessRequest\x1a\".business.FetchAllBusinessResponse\"\x00\x12M\n\x06\x43reate\x12\x1f.business.CreateBusinessRequest\x1a .business.CreateBusinessResponse\"\x00\x12V\n\tFetchById\x12\".business.FetchBusinessByIdRequest\x1a#.business.FetchBusinessByIdResponse\"\x00\x12M\n\x06Update\x12\x1f.business.UpdateBusinessRequest\x1a .business.UpdateBusinessResponse\"\x00\x12Q\n\nDeleteById\x12\x1f.business.DeleteBusinessRequest\x1a .business.DeleteBusinessResponse\"\x00\x62\x06proto3')
 
 
 
 _BUSINESS = DESCRIPTOR.message_types_by_name['Business']
+_BUSINESSUPDATE = DESCRIPTOR.message_types_by_name['BusinessUpdate']
+_FETCHALLBUSINESSREQUEST = DESCRIPTOR.message_types_by_name['FetchAllBusinessRequest']
+_FETCHALLBUSINESSRESPONSEDATASEARCHOPTIONS = DESCRIPTOR.message_types_by_name['FetchAllBusinessResponseDataSearchOptions']
+_FETCHALLBUSINESSRESPONSEDATA = DESCRIPTOR.message_types_by_name['FetchAllBusinessResponseData']
 _FETCHALLBUSINESSRESPONSE = DESCRIPTOR.message_types_by_name['FetchAllBusinessResponse']
 _CREATEBUSINESSREQUEST = DESCRIPTOR.message_types_by_name['CreateBusinessRequest']
 _CREATEBUSINESSRESPONSE = DESCRIPTOR.message_types_by_name['CreateBusinessResponse']
@@ -34,6 +38,34 @@ Business = _reflection.GeneratedProtocolMessageType('Business', (_message.Messag
   # @@protoc_insertion_point(class_scope:business.Business)
   })
 _sym_db.RegisterMessage(Business)
+
+BusinessUpdate = _reflection.GeneratedProtocolMessageType('BusinessUpdate', (_message.Message,), {
+  'DESCRIPTOR' : _BUSINESSUPDATE,
+  '__module__' : 'business_pb2'
+  # @@protoc_insertion_point(class_scope:business.BusinessUpdate)
+  })
+_sym_db.RegisterMessage(BusinessUpdate)
+
+FetchAllBusinessRequest = _reflection.GeneratedProtocolMessageType('FetchAllBusinessRequest', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHALLBUSINESSREQUEST,
+  '__module__' : 'business_pb2'
+  # @@protoc_insertion_point(class_scope:business.FetchAllBusinessRequest)
+  })
+_sym_db.RegisterMessage(FetchAllBusinessRequest)
+
+FetchAllBusinessResponseDataSearchOptions = _reflection.GeneratedProtocolMessageType('FetchAllBusinessResponseDataSearchOptions', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHALLBUSINESSRESPONSEDATASEARCHOPTIONS,
+  '__module__' : 'business_pb2'
+  # @@protoc_insertion_point(class_scope:business.FetchAllBusinessResponseDataSearchOptions)
+  })
+_sym_db.RegisterMessage(FetchAllBusinessResponseDataSearchOptions)
+
+FetchAllBusinessResponseData = _reflection.GeneratedProtocolMessageType('FetchAllBusinessResponseData', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHALLBUSINESSRESPONSEDATA,
+  '__module__' : 'business_pb2'
+  # @@protoc_insertion_point(class_scope:business.FetchAllBusinessResponseData)
+  })
+_sym_db.RegisterMessage(FetchAllBusinessResponseData)
 
 FetchAllBusinessResponse = _reflection.GeneratedProtocolMessageType('FetchAllBusinessResponse', (_message.Message,), {
   'DESCRIPTOR' : _FETCHALLBUSINESSRESPONSE,
@@ -103,25 +135,33 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _BUSINESS._serialized_start=29
-  _BUSINESS._serialized_end=165
-  _FETCHALLBUSINESSRESPONSE._serialized_start=167
-  _FETCHALLBUSINESSRESPONSE._serialized_end=264
-  _CREATEBUSINESSREQUEST._serialized_start=267
-  _CREATEBUSINESSREQUEST._serialized_end=404
-  _CREATEBUSINESSRESPONSE._serialized_start=406
-  _CREATEBUSINESSRESPONSE._serialized_end=461
-  _FETCHBUSINESSBYIDREQUEST._serialized_start=463
-  _FETCHBUSINESSBYIDREQUEST._serialized_end=501
-  _FETCHBUSINESSBYIDRESPONSE._serialized_start=503
-  _FETCHBUSINESSBYIDRESPONSE._serialized_end=599
-  _UPDATEBUSINESSREQUEST._serialized_start=601
-  _UPDATEBUSINESSREQUEST._serialized_end=662
-  _UPDATEBUSINESSRESPONSE._serialized_start=664
-  _UPDATEBUSINESSRESPONSE._serialized_end=757
-  _DELETEBUSINESSREQUEST._serialized_start=759
-  _DELETEBUSINESSREQUEST._serialized_end=794
-  _DELETEBUSINESSRESPONSE._serialized_start=796
-  _DELETEBUSINESSRESPONSE._serialized_end=851
-  _BUSINESSSERVICE._serialized_start=854
-  _BUSINESSSERVICE._serialized_end=1196
+  _BUSINESS._serialized_end=205
+  _BUSINESSUPDATE._serialized_start=207
+  _BUSINESSUPDATE._serialized_end=329
+  _FETCHALLBUSINESSREQUEST._serialized_start=331
+  _FETCHALLBUSINESSREQUEST._serialized_end=389
+  _FETCHALLBUSINESSRESPONSEDATASEARCHOPTIONS._serialized_start=391
+  _FETCHALLBUSINESSRESPONSEDATASEARCHOPTIONS._serialized_end=506
+  _FETCHALLBUSINESSRESPONSEDATA._serialized_start=509
+  _FETCHALLBUSINESSRESPONSEDATA._serialized_end=652
+  _FETCHALLBUSINESSRESPONSE._serialized_start=654
+  _FETCHALLBUSINESSRESPONSE._serialized_end=765
+  _CREATEBUSINESSREQUEST._serialized_start=768
+  _CREATEBUSINESSREQUEST._serialized_end=905
+  _CREATEBUSINESSRESPONSE._serialized_start=907
+  _CREATEBUSINESSRESPONSE._serialized_end=962
+  _FETCHBUSINESSBYIDREQUEST._serialized_start=964
+  _FETCHBUSINESSBYIDREQUEST._serialized_end=1002
+  _FETCHBUSINESSBYIDRESPONSE._serialized_start=1004
+  _FETCHBUSINESSBYIDRESPONSE._serialized_end=1100
+  _UPDATEBUSINESSREQUEST._serialized_start=1102
+  _UPDATEBUSINESSREQUEST._serialized_end=1169
+  _UPDATEBUSINESSRESPONSE._serialized_start=1171
+  _UPDATEBUSINESSRESPONSE._serialized_end=1264
+  _DELETEBUSINESSREQUEST._serialized_start=1266
+  _DELETEBUSINESSREQUEST._serialized_end=1301
+  _DELETEBUSINESSRESPONSE._serialized_start=1303
+  _DELETEBUSINESSRESPONSE._serialized_end=1358
+  _BUSINESSSERVICE._serialized_start=1361
+  _BUSINESSSERVICE._serialized_end=1792
 # @@protoc_insertion_point(module_scope)

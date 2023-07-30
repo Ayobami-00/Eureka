@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from .import business_pb2 as business__pb2
+from . import business_pb2 as business__pb2
 
 
 class BusinessServiceStub(object):
@@ -14,6 +14,11 @@ class BusinessServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.FetchAll = channel.unary_unary(
+                '/business.BusinessService/FetchAll',
+                request_serializer=business__pb2.FetchAllBusinessRequest.SerializeToString,
+                response_deserializer=business__pb2.FetchAllBusinessResponse.FromString,
+                )
         self.Create = channel.unary_unary(
                 '/business.BusinessService/Create',
                 request_serializer=business__pb2.CreateBusinessRequest.SerializeToString,
@@ -29,8 +34,8 @@ class BusinessServiceStub(object):
                 request_serializer=business__pb2.UpdateBusinessRequest.SerializeToString,
                 response_deserializer=business__pb2.UpdateBusinessResponse.FromString,
                 )
-        self.Delete = channel.unary_unary(
-                '/business.BusinessService/Delete',
+        self.DeleteById = channel.unary_unary(
+                '/business.BusinessService/DeleteById',
                 request_serializer=business__pb2.DeleteBusinessRequest.SerializeToString,
                 response_deserializer=business__pb2.DeleteBusinessResponse.FromString,
                 )
@@ -39,9 +44,14 @@ class BusinessServiceStub(object):
 class BusinessServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
+    def FetchAll(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def Create(self, request, context):
-        """rpc FetchAll() returns (FetchAllBusinessResponse) {}
-        """
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -58,7 +68,7 @@ class BusinessServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Delete(self, request, context):
+    def DeleteById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -67,6 +77,11 @@ class BusinessServiceServicer(object):
 
 def add_BusinessServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'FetchAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchAll,
+                    request_deserializer=business__pb2.FetchAllBusinessRequest.FromString,
+                    response_serializer=business__pb2.FetchAllBusinessResponse.SerializeToString,
+            ),
             'Create': grpc.unary_unary_rpc_method_handler(
                     servicer.Create,
                     request_deserializer=business__pb2.CreateBusinessRequest.FromString,
@@ -82,8 +97,8 @@ def add_BusinessServiceServicer_to_server(servicer, server):
                     request_deserializer=business__pb2.UpdateBusinessRequest.FromString,
                     response_serializer=business__pb2.UpdateBusinessResponse.SerializeToString,
             ),
-            'Delete': grpc.unary_unary_rpc_method_handler(
-                    servicer.Delete,
+            'DeleteById': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteById,
                     request_deserializer=business__pb2.DeleteBusinessRequest.FromString,
                     response_serializer=business__pb2.DeleteBusinessResponse.SerializeToString,
             ),
@@ -96,6 +111,23 @@ def add_BusinessServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class BusinessService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def FetchAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/business.BusinessService/FetchAll',
+            business__pb2.FetchAllBusinessRequest.SerializeToString,
+            business__pb2.FetchAllBusinessResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Create(request,
@@ -149,7 +181,7 @@ class BusinessService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Delete(request,
+    def DeleteById(request,
             target,
             options=(),
             channel_credentials=None,
@@ -159,7 +191,7 @@ class BusinessService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/business.BusinessService/Delete',
+        return grpc.experimental.unary_unary(request, target, '/business.BusinessService/DeleteById',
             business__pb2.DeleteBusinessRequest.SerializeToString,
             business__pb2.DeleteBusinessResponse.FromString,
             options, channel_credentials,

@@ -8,4 +8,6 @@ eureka-api-gateway-go/commands.txt
 eureka-api-gateway-go/.env
 eureka-api-auth-service-go/.env
 
+# eureka-api-business-service-python
 eureka-api-business-service-python/venv
+eureka-api-business-service-python/.env

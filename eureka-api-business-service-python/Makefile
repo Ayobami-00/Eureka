@@ -12,6 +12,15 @@ createdb:
 
 	docker exec -it postgres15-alpine createdb --username=eureka_admin --owner=eureka_admin eureka_db
 
+migrateup:
+
+	alembic upgrade head
+
+migratedown:
+
+	alembic downgrade base
+
+
 server:
 	python src/main.py
 

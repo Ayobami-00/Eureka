@@ -18,3 +18,50 @@ def proto_message_to_schema(message):
         )
 
         return schema
+    
+    elif type(message) == FetchAllBusinessRequest:
+
+        schema = FetchAllBusiness(
+            page=message.page,
+            page_size=message.page_size
+
+        )
+
+        return schema
+    
+    elif type(message) == FetchBusinessByIdRequest:
+
+        schema = FetchBusinessById(
+            id=message.id,
+
+        )
+
+        return schema
+    
+
+    elif type(message) == UpdateBusinessRequest:
+
+        schema = UpdateBusiness(
+            id=message.business.id,
+            name=message.business.name,
+            description=message.business.description,
+            long_address=message.business.long_address,
+            latitude=message.business.latitude,
+            longitude=message.business.longitude,
+
+        )
+
+        return schema
+    
+    elif type(message) == DeleteBusinessRequest:
+
+        schema = DeleteBusinessById(
+            id=message.id,
+
+        )
+
+        return schema
+    
+    
+
+

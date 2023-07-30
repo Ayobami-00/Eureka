@@ -4,22 +4,53 @@ package business;
 
 
 message Business {
-  string id = 1;
+  int64 id = 1;
   string created_by = 2;
   string name = 3;
   string description = 4;
   string long_address = 5;
   double latitude = 6;
   double longitude = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
   }
 
 
+
+  message BusinessUpdate {
+    int64 id = 1;
+    string name = 3;
+    string description = 4;
+    string long_address = 5;
+    double latitude = 6;
+    double longitude = 7;
+    }
+
 // Fetch All Business
+
+message FetchAllBusinessRequest {
+  int64 page = 1;
+  int64 page_size = 2;;
+}
+
+
+message FetchAllBusinessResponseDataSearchOptions {
+  int64 page = 1;
+  int64 page_size = 2;
+  string ordering = 3;
+  int64 total_count = 4;
+}
+
+message FetchAllBusinessResponseData {
+  repeated Business founds = 1;
+  FetchAllBusinessResponseDataSearchOptions search_options = 2;
+  
+}
 
 message FetchAllBusinessResponse {
   int64 code = 1;
   string message = 2;
-  repeated Business businesses = 3;
+  FetchAllBusinessResponseData data = 3;
 }
 
 
@@ -60,7 +91,7 @@ message FetchBusinessByIdResponse {
 // Update Business
 
 message UpdateBusinessRequest {
-  Business business = 1;
+  BusinessUpdate business = 1;
 
 }
 
@@ -88,10 +119,11 @@ message DeleteBusinessResponse {
 
 
 
+
 service BusinessService {
-  // rpc FetchAll() returns (FetchAllBusinessResponse) {}
+  rpc FetchAll(FetchAllBusinessRequest) returns (FetchAllBusinessResponse) {}
   rpc Create(CreateBusinessRequest) returns (CreateBusinessResponse) {}
   rpc FetchById(FetchBusinessByIdRequest) returns (FetchBusinessByIdResponse) {}
   rpc Update(UpdateBusinessRequest) returns (UpdateBusinessResponse) {}
-  rpc Delete(DeleteBusinessRequest) returns (DeleteBusinessResponse) {}
+  rpc DeleteById(DeleteBusinessRequest) returns (DeleteBusinessResponse) {}
 }
